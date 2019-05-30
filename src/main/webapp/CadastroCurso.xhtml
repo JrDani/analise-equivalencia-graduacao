@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<h:outputStylesheet name="style.css" library="css"/>
+<title>Novo curso</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<h1>Novo curso </h1>
+		<h:commandButton value="Novo" styleClass="btn btn-info"/>
+		<h:commandButton value="Consulta" styleClass="btn btn-secondary"/>
+		
+		<h:panelGrid columns="2" styleClass="form-grid" columnClasses="label, campo">
+			
+			<h:outputLabel value="Selecione a faculdade"/>
+			<h:selectOneMenu>
+				<f:selectItem itemValue="Unicesumar"/>
+				<f:selectItem itemValue="UEL"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Nome do curso" />
+			<h:inputText />
+			
+			<h:outputLabel value="Grade" />
+			<h:inputText />
+			
+			<h:outputLabel/>
+			<h:commandButton value="Cadastrar" styleClass="btn btn-primary"/>
+			
+		</h:panelGrid>
+		 
+	</h:form>
+</h:body>
+</html>

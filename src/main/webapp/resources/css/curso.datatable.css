@@ -1,0 +1,15 @@
+td{
+	text-align:center;	
+}
+
+td.faculdade{
+	width: 200px
+}
+
+td.nome_curso{
+	width: 400px;
+}
+
+td.grade{
+	width: 80px;
+}
