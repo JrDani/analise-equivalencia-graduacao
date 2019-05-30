@@ -6,3 +6,4 @@ Servers/*
 .classpath
 RemoteSystemsTempFiles/*
 */bin/
+/target/
