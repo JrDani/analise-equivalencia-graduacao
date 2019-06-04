@@ -3,26 +3,31 @@ package br.com.aneq.view;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import br.com.aneq.dao.CursoDAO;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import br.com.aneq.model.Curso;
+import br.com.aneq.util.HibernateUtil;
 
 @ManagedBean
 @SessionScoped
 public class CursosBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private CursoDAO cursoDAO;
-
 	private List<Curso> cursos;
 	private Curso curso = new Curso();
 	
-	public CursosBean() {
-		this.cursoDAO = new CursoDAO();
-		this.cursos = cursoDAO.lista();		
-	}
+	@PostConstruct
+	public void init() {
+		Session session = HibernateUtil.getSession();
+		this.cursos = session.createCriteria(Curso.class).list();
+		
+		session.close();
+	}	
 
 	public List<Curso> getCursos() {
 		return this.cursos;
@@ -33,7 +38,14 @@ public class CursosBean implements Serializable{
 	}
 	
 	public void adicionar() {
-		this.cursos.add(this.curso);
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.merge(this.curso);
+		
+		tx.commit();
+		session.close();
+		
 		this.curso = new Curso();
 	}
 	

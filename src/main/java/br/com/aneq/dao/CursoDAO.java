@@ -2,24 +2,18 @@ package br.com.aneq.dao;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import org.hibernate.Session;
 
 import br.com.aneq.model.Curso;
+import br.com.aneq.util.HibernateUtil;
 
-@Stateless
 public class CursoDAO {
-	
-	@PersistenceContext(unitName = "aneqPU")
-    private EntityManager em;
-	
+		
 	public List<Curso> lista() {
 		List<Curso> cursos = null;
 		try {
-			Query query = em.createQuery("select c from Curso c");
-			cursos = query.getResultList();		
+			Session session = HibernateUtil.getSession();
+			cursos = session.createCriteria(Curso.class).list();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
