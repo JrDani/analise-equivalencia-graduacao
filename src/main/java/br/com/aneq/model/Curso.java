@@ -13,6 +13,18 @@ import javax.persistence.Transient;
 @Table(name="curso")
 public class Curso implements Serializable {
 	
+	public Curso() {
+		
+	}
+	
+	public Curso(Long id, String nome, String faculdade, Integer grade) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.faculdade = faculdade;
+		this.grade = grade;
+	}
+
 	@Transient
 	private static final long serialVersionUID = 1L;
 	

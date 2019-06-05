@@ -22,7 +22,7 @@ public class HibernateUtil {
 			ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 			throw new ExceptionInInitializerError(e);
 		}
 	}

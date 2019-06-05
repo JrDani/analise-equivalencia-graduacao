@@ -13,19 +13,20 @@ import org.hibernate.Transaction;
 import br.com.aneq.model.Curso;
 import br.com.aneq.util.HibernateUtil;
 
-@ManagedBean
+@ManagedBean(name="cursosBean")
 @SessionScoped
 public class CursosBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private List<Curso> cursos;
-	private Curso curso = new Curso();
+	private Curso curso;
 	
 	@PostConstruct
 	public void init() {
-		Session session = HibernateUtil.getSession();
-		this.cursos = session.createCriteria(Curso.class).list();
+		this.curso = new Curso();
 		
+		Session session = HibernateUtil.getSession();
+			this.cursos = session.createCriteria(Curso.class).list();		
 		session.close();
 	}	
 
@@ -37,7 +38,12 @@ public class CursosBean implements Serializable{
 		return this.curso;
 	}
 	
+	public void SetCurso(Curso curso) {
+		this.curso = curso;
+	}
+	
 	public void adicionar() {
+		try {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		
@@ -45,7 +51,9 @@ public class CursosBean implements Serializable{
 		
 		tx.commit();
 		session.close();
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		this.curso = new Curso();
 	}
 	
